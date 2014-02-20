@@ -1,0 +1,9 @@
+/* Prevents navbar from overlapping page */
+body {
+    padding-top: 70px;
+}
+
+.fixlink {
+    padding-top: 60px;
+    margin-top: -60px;
+}

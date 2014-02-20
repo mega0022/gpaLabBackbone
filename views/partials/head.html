@@ -1,0 +1,83 @@
+<title>{{ title }}</title>
+
+<link rel="stylesheet" href="/stylesheets/style.css"/>
+<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css"/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<script id="section-template" type="text/html">
+    <h2 id = ""
+    <h2 id="<%= htmlId %>" class="fixlink">
+        <button class="btn-default text-right pull-left edit"> <%=  className %> </button>
+        <br />
+    </h2>
+
+    <select id ="grade1" name="grade" align="center">
+        <option value=0>-select grade-</option>
+        <option value="A">A</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B">B</option>
+        <option value="B-">B-</option>
+        <option value="C+">C+</option>
+        <option value="C">C</option>
+        <option value="C-">C-</option>
+        <option value="D+">D+</option>
+        <option value="D">D</option>
+        <option value="D-">D-</option>
+        <option value="F">F</option>
+    </select>
+
+    <select name="credit" align="right">
+        <option selected="selected" value=0>-select credit-</option>
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5</option>
+    </select>
+
+    <div>
+        <p >grade:   <%= grade %> </p>
+        <p > credit:  <%= credit %> </p>
+    </div>
+
+
+</script>
+
+<script id="section-edit-template" type="text/html">
+    <h2 id="<%= htmlId %>"><textarea name="className" class="form-control" rows="1"> <%= className %> </textarea>
+        <button class="btn btn-success text-right pull-right save">Save</button>
+    </h2>
+
+    <select id ="grade1" name="grade" align="center">
+        <option value=0>-select grade-</option>
+        <option value="A">A</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B">B</option>
+        <option value="B-">B-</option>
+        <option value="C+">C+</option>
+        <option value="C">C</option>
+        <option value="C-">C-</option>
+        <option value="D+">D+</option>
+        <option value="D">D</option>
+        <option value="D-">D-</option>
+        <option value="F">F</option>
+    </select>
+
+    <select name="credit" align="right">
+        <option selected="selected" value=0>-select credit-</option>
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5</option>
+    </select>
+
+    <div>
+        <p >grade:   <%= grade %> </p>
+        <p > credit:  <%= credit %> </p>
+    </div>
+</script>

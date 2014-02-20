@@ -1,0 +1,19 @@
+{
+  "name": "Application-base",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --ui tdd -R spec -t 5000"
+  },
+  "dependencies": {
+    "express": "3.4.8",
+    "hogan-express": "0.5.2",
+    "coffee-script": "1.7.x",
+    "mongoose": "~3.8.4"
+  },
+  "devDependencies": {
+    "mocha": "1.17.x",
+    "istanbul": "0.2.x",
+    "nodemon": "1.0.x"
+  }
+}

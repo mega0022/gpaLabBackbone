@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "sectionCollection.js",
+  "sourceRoot": "",
+  "sources": [
+    "sectionCollection.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA;;GAAA;AAAA;AAAA;AAAA,MAAA;mSAAA;;AAAA,EAGM,MAAM,CAAC;AACX,wCAAA,CAAA;;;;KAAA;;AAAA,gCAAA,KAAA,GAAO,MAAM,CAAC,OAAd,CAAA;;AAAA,gCACA,GAAA,GAAK,WADL,CAAA;;6BAAA;;KADqC,QAAQ,CAAC,WAHhD,CAAA;AAAA"
+}
