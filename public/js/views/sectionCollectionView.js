@@ -18,7 +18,8 @@ Created by mart2967 on 1/30/14.
     }
 
     SectionCollectionView.prototype.events = {
-      'change': 'change'
+      'change': 'change',
+      'click button.add': 'addMore'
     };
 
     SectionCollectionView.prototype.initialize = function() {
@@ -26,6 +27,7 @@ Created by mart2967 on 1/30/14.
     };
 
     SectionCollectionView.prototype.render = function() {
+      this.$el.append("<button class='btn btn-default text-right addClass' name='add' id='add' style='margin-left:40%; margin-bottom: 50px'>Add Class</button>");
       _.each(this.collection.models, (function(item) {
         var view;
         view = new SectionView({
@@ -37,14 +39,25 @@ Created by mart2967 on 1/30/14.
     };
 
     SectionCollectionView.prototype.change = function() {
-      return $("#GPADisplay").html("Your GPA: " + 41);
+      return $("#GPADisplay").html("Your GPA: " + makeGPA());
+    };
+
+    SectionCollectionView.prototype.addMore = function() {
+      var newSection;
+      newSection = new Section({
+        className: "New Class"
+      });
+      newSection.save();
+      return this.$el.append(new SectionView({
+        model: newSection
+      }).el);
     };
 
     makeGPA = function() {
       _.each(this.collection.section, (function(item) {
         var gradesArr;
         gradesArr = [];
-        return gradesArr[-1] = gradesToNumbers(item.grade);
+        return gradesArr[-1] = gradesToNumbers(section.grade);
       }));
       return 42;
     };
