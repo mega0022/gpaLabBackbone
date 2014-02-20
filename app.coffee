@@ -17,6 +17,7 @@ db.once 'open', ->
 
 
 #nodeInfo = new models.Section {title: 'Node.js', link: 'http://nodejs.org/', body: 'blah', category: 'main'
+
 #nodeInfo.save()
 
 
