@@ -5,12 +5,11 @@ Created by mart2967 on 1/30/14.
  */
 
 (function() {
-  var __hasProp = {}.hasOwnProperty,
+  var gradesToNumbers,
+    __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   window.SectionCollectionView = (function(_super) {
-    var gradesToNumbers, makeGPA;
-
     __extends(SectionCollectionView, _super);
 
     function SectionCollectionView() {
@@ -19,7 +18,8 @@ Created by mart2967 on 1/30/14.
 
     SectionCollectionView.prototype.events = {
       'change': 'change',
-      'click button.add': 'add'
+      'click button.add': 'add',
+      'click button.manual': 'makeGPA'
     };
 
     SectionCollectionView.prototype.initialize = function() {
@@ -30,6 +30,7 @@ Created by mart2967 on 1/30/14.
     SectionCollectionView.prototype.render = function() {
       _.each(this.collection.models, (function(item) {
         var view;
+        console.log(item);
         view = new SectionView({
           model: item
         });
@@ -39,7 +40,17 @@ Created by mart2967 on 1/30/14.
     };
 
     SectionCollectionView.prototype.change = function() {
-      return $("#GPADisplay").html("Your GPA: " + makeGPA());
+      var creditTotal, gpa, gradesTimesCredits;
+      creditTotal = 0;
+      gradesTimesCredits = 0;
+      gpa = 0;
+      _.each(this.collection.models, (function(item) {
+        creditTotal += (item.get('credit')) * 1;
+        return gradesTimesCredits += (item.get('credit')) * 1 * gradesToNumbers(item.get('grade'));
+      }), this);
+      gpa = gradesTimesCredits / creditTotal;
+      $("#GPADisplay").html("Your GPA: " + gpa.toFixed(2));
+      return this;
     };
 
     SectionCollectionView.prototype.add = function() {
@@ -52,47 +63,46 @@ Created by mart2967 on 1/30/14.
       return this.model.save({});
     };
 
-    makeGPA = function() {
-      _.each(this.collection(this.model.toJSON)(function() {
-        var gradesArr;
-        gradesArr = [];
-        return gradesArr[-1] = gradesToNumbers(section.grade);
-      }));
-      return 42;
-    };
-
-    gradesToNumbers = function(grade1) {
-      switch (grade1) {
-        case "A":
-          return 4;
-        case "A-":
-          return 3.666;
-        case "B+":
-          return 3.333;
-        case "B":
-          return 3;
-        case "B-":
-          return 2.666;
-        case "C+":
-          return 2.333;
-        case "C":
-          return 2;
-        case "C-":
-          return 1.666;
-        case "D+":
-          return 1.333;
-        case "D":
-          return 1;
-        case "D-":
-          return .666;
-        default:
-          return 0;
-      }
-    };
-
     return SectionCollectionView;
 
   })(Backbone.View);
+
+
+  /*  makeGPA = (that) ->
+      _.each that.collection, ((item) ->
+        console.log item
+     )
+    this
+   */
+
+  gradesToNumbers = function(grade1) {
+    switch (grade1) {
+      case "A":
+        return 4.00;
+      case "A-":
+        return 3.66;
+      case "B+":
+        return 3.33;
+      case "B":
+        return 3.00;
+      case "B-":
+        return 2.66;
+      case "C+":
+        return 2.33;
+      case "C":
+        return 2.00;
+      case "C-":
+        return 1.66;
+      case "D+":
+        return 1.33;
+      case "D":
+        return 1.00;
+      case "D-":
+        return .66;
+      default:
+        return 0;
+    }
+  };
 
 }).call(this);
 
