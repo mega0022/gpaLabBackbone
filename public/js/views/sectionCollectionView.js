@@ -46,13 +46,14 @@ Created by mart2967 on 1/30/14.
       var newSection;
       newSection = new Section;
       newSection.save();
-      return this.$el.append(new SectionView({
+      this.$el.append(new SectionView({
         model: newSection
       }).el);
+      return this.model.save({});
     };
 
     makeGPA = function() {
-      _.each(this.collection.section, (function(item) {
+      _.each(this.collection(this.model.toJSON)(function() {
         var gradesArr;
         gradesArr = [];
         return gradesArr[-1] = gradesToNumbers(section.grade);

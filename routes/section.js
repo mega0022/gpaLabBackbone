@@ -29,7 +29,7 @@
     newSection = new Section(req.body);
     console.log('created section ' + newSection.title);
     newSection.save();
-    return res.send();
+    return res.send(newSection);
   };
 
   exports.getById = function(req, res) {

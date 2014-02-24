@@ -34,14 +34,15 @@ class window.SectionCollectionView extends Backbone.View
     newSection = new Section
     newSection.save()
     @$el.append new SectionView(model: newSection).el
+    @model.save {}
 
 
 
   makeGPA = () ->
-    _.each @collection.section, ((item) ->
+    _.each @collection(@model.toJSON) ->
+      #PUT ITEM IN HERE SOMEWHERE, CAPS LOCK FOR IMPORTANCE
       gradesArr = []
       gradesArr[-1] = gradesToNumbers(section.grade)
-    )
     42
   #    _.each @collection.models, ((item) ->
   #      view = new NavbarItemView(model: item)

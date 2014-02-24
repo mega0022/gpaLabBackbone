@@ -20,7 +20,7 @@ exports.create = (req, res) ->
   newSection = new Section req.body
   console.log 'created section ' + newSection.title
   newSection.save()
-  res.send()
+  res.send(newSection)
 
 exports.getById = (req, res) ->
   id = req.route.params['id']
