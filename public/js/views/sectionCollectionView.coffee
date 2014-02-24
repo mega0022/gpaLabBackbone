@@ -25,8 +25,9 @@ class window.SectionCollectionView extends Backbone.View
     gradesTimesCredits = 0
     gpa = 0
     _.each @collection.models, ((item) ->
-      creditTotal += (item.get 'credit') * 1
-      gradesTimesCredits += (item.get 'credit') * 1 * gradesToNumbers(item.get 'grade')
+      if (item.get 'credit') != '--' and (item.get 'grade') != '--'
+        creditTotal += (item.get 'credit') * 1
+        gradesTimesCredits += (item.get 'credit') * 1 * gradesToNumbers(item.get 'grade')
     ), this
     gpa = gradesTimesCredits/creditTotal
     sectionList = new window.SectionCollection()
@@ -34,7 +35,8 @@ class window.SectionCollectionView extends Backbone.View
       $('#content').html new window.SectionCollectionView(collection: sectionList).$el
       $('#bs-example-navbar-collapse-1').html new window.NavbarView(collection: sectionList).$el
       return
-    $("#GPADisplay").html("Your GPA: " + gpa.toFixed(2))
+    if creditTotal != 0
+      $("#GPADisplay").html("Your GPA: " + gpa.toFixed(2))
     this
 
 

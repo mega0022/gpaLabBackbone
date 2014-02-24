@@ -44,8 +44,10 @@ Created by mart2967 on 1/30/14.
       gradesTimesCredits = 0;
       gpa = 0;
       _.each(this.collection.models, (function(item) {
-        creditTotal += (item.get('credit')) * 1;
-        return gradesTimesCredits += (item.get('credit')) * 1 * gradesToNumbers(item.get('grade'));
+        if ((item.get('credit')) !== '--' && (item.get('grade')) !== '--') {
+          creditTotal += (item.get('credit')) * 1;
+          return gradesTimesCredits += (item.get('credit')) * 1 * gradesToNumbers(item.get('grade'));
+        }
       }), this);
       gpa = gradesTimesCredits / creditTotal;
       sectionList = new window.SectionCollection();
@@ -59,7 +61,9 @@ Created by mart2967 on 1/30/14.
           }).$el);
         }
       });
-      $("#GPADisplay").html("Your GPA: " + gpa.toFixed(2));
+      if (creditTotal !== 0) {
+        $("#GPADisplay").html("Your GPA: " + gpa.toFixed(2));
+      }
       return this;
     };
 
