@@ -23,14 +23,13 @@ Created by mart2967 on 1/30/14.
     };
 
     SectionCollectionView.prototype.initialize = function() {
-      this.$el.append("<button class='btn btn-default text-right add' style='margin-left:40%; margin-bottom: 50px'>Add Class</button>");
-      return this.render();
+      this.render();
+      return this.$el.append("<button class='btn btn-default text-right add' style='margin-left:40%; margin-bottom: 50px'>Add Class</button>");
     };
 
     SectionCollectionView.prototype.render = function() {
       _.each(this.collection.models, (function(item) {
         var view;
-        console.log(item);
         view = new SectionView({
           model: item
         });
@@ -40,7 +39,7 @@ Created by mart2967 on 1/30/14.
     };
 
     SectionCollectionView.prototype.change = function() {
-      var creditTotal, gpa, gradesTimesCredits;
+      var creditTotal, gpa, gradesTimesCredits, sectionList;
       creditTotal = 0;
       gradesTimesCredits = 0;
       gpa = 0;
@@ -49,31 +48,45 @@ Created by mart2967 on 1/30/14.
         return gradesTimesCredits += (item.get('credit')) * 1 * gradesToNumbers(item.get('grade'));
       }), this);
       gpa = gradesTimesCredits / creditTotal;
+      sectionList = new window.SectionCollection();
+      sectionList.fetch({
+        success: function() {
+          $('#content').html(new window.SectionCollectionView({
+            collection: sectionList
+          }).$el);
+          $('#bs-example-navbar-collapse-1').html(new window.NavbarView({
+            collection: sectionList
+          }).$el);
+        }
+      });
       $("#GPADisplay").html("Your GPA: " + gpa.toFixed(2));
       return this;
     };
 
     SectionCollectionView.prototype.add = function() {
-      var newSection;
+      var newSection, sectionList;
       newSection = new Section;
       newSection.save();
       this.$el.append(new SectionView({
         model: newSection
       }).el);
+      sectionList = new window.SectionCollection();
+      sectionList.fetch({
+        success: function() {
+          $('#content').html(new window.SectionCollectionView({
+            collection: sectionList
+          }).$el);
+          $('#bs-example-navbar-collapse-1').html(new window.NavbarView({
+            collection: sectionList
+          }).$el);
+        }
+      });
       return this.model.save({});
     };
 
     return SectionCollectionView;
 
   })(Backbone.View);
-
-
-  /*  makeGPA = (that) ->
-      _.each that.collection, ((item) ->
-        console.log item
-     )
-    this
-   */
 
   gradesToNumbers = function(grade1) {
     switch (grade1) {

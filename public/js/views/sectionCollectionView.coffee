@@ -8,12 +8,11 @@ class window.SectionCollectionView extends Backbone.View
     'click button.manual' : 'makeGPA'
 
   initialize: ->
-    @$el.append "<button class='btn btn-default text-right add' style='margin-left:40%; margin-bottom: 50px'>Add Class</button>"
     @render()
+    @$el.append "<button class='btn btn-default text-right add' style='margin-left:40%; margin-bottom: 50px'>Add Class</button>"
 
   render: ->
     _.each @collection.models, ((item) ->
-      console.log item
       view = new SectionView(model: item)
       @$el.append view.el
       return
@@ -26,11 +25,15 @@ class window.SectionCollectionView extends Backbone.View
     gradesTimesCredits = 0
     gpa = 0
     _.each @collection.models, ((item) ->
-      #if item.get 'credit' ==
       creditTotal += (item.get 'credit') * 1
       gradesTimesCredits += (item.get 'credit') * 1 * gradesToNumbers(item.get 'grade')
     ), this
     gpa = gradesTimesCredits/creditTotal
+    sectionList = new window.SectionCollection()
+    sectionList.fetch success: ->
+      $('#content').html new window.SectionCollectionView(collection: sectionList).$el
+      $('#bs-example-navbar-collapse-1').html new window.NavbarView(collection: sectionList).$el
+      return
     $("#GPADisplay").html("Your GPA: " + gpa.toFixed(2))
     this
 
@@ -39,20 +42,12 @@ class window.SectionCollectionView extends Backbone.View
     newSection = new Section
     newSection.save()
     @$el.append new SectionView(model: newSection).el
+    sectionList = new window.SectionCollection()
+    sectionList.fetch success: ->
+      $('#content').html new window.SectionCollectionView(collection: sectionList).$el
+      $('#bs-example-navbar-collapse-1').html new window.NavbarView(collection: sectionList).$el
+      return
     @model.save {}
-
-
-
-###  makeGPA = (that) ->
-    _.each that.collection, ((item) ->
-      console.log item
-   )
-  this###
-#      console.log item.get 'grade'
-#      console.log item.get 'credit'
-#      console.log item
-#   )
-
 
 
 
