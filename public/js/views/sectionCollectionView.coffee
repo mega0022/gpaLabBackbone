@@ -4,20 +4,21 @@ Created by mart2967 on 1/30/14.
 class window.SectionCollectionView extends Backbone.View
   events:
     'change': 'change'
-    'click button.add' : 'addMore'
+    'click button.add' : 'add'
 
   initialize: ->
+    @$el.append "<button class='btn btn-default text-right add' style='margin-left:40%; margin-bottom: 50px'>Add Class</button>"
     @render()
 
   render: ->
-    @$el.append "<button class='btn btn-default text-right addClass' name='add' id='add' style='margin-left:40%; margin-bottom: 50px'>Add Class</button>"
+
     _.each @collection.models, ((item) ->
       view = new SectionView(model: item)
       @$el.append view.el
       return
     ), this
     this
-    # returning itself for chaining calls. syntax bears futher investigation
+  # returning itself for chaining calls. syntax bears futher investigation
 
   change: ->
     $("#GPADisplay").html("Your GPA: " + makeGPA())
@@ -29,8 +30,8 @@ class window.SectionCollectionView extends Backbone.View
 #    this
 
 
-  addMore: ->
-    newSection = new Section(className: "New Class")
+  add: ->
+    newSection = new Section
     newSection.save()
     @$el.append new SectionView(model: newSection).el
 
@@ -65,4 +66,3 @@ class window.SectionCollectionView extends Backbone.View
       when "D" then 1
       when "D-" then .666
       else 0
-

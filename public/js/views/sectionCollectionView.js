@@ -19,15 +19,15 @@ Created by mart2967 on 1/30/14.
 
     SectionCollectionView.prototype.events = {
       'change': 'change',
-      'click button.add': 'addMore'
+      'click button.add': 'add'
     };
 
     SectionCollectionView.prototype.initialize = function() {
+      this.$el.append("<button class='btn btn-default text-right add' style='margin-left:40%; margin-bottom: 50px'>Add Class</button>");
       return this.render();
     };
 
     SectionCollectionView.prototype.render = function() {
-      this.$el.append("<button class='btn btn-default text-right addClass' name='add' id='add' style='margin-left:40%; margin-bottom: 50px'>Add Class</button>");
       _.each(this.collection.models, (function(item) {
         var view;
         view = new SectionView({
@@ -42,11 +42,9 @@ Created by mart2967 on 1/30/14.
       return $("#GPADisplay").html("Your GPA: " + makeGPA());
     };
 
-    SectionCollectionView.prototype.addMore = function() {
+    SectionCollectionView.prototype.add = function() {
       var newSection;
-      newSection = new Section({
-        className: "New Class"
-      });
+      newSection = new Section;
       newSection.save();
       return this.$el.append(new SectionView({
         model: newSection
