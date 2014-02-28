@@ -3,9 +3,8 @@ Created by mart2967 on 1/30/14.
 ###
 class window.SectionCollectionView extends Backbone.View
   events:
-    'change': 'change'
+    'change': 'updateGPA'
     'click button.add' : 'add'
-    'click button.manual' : 'makeGPA'
 
   initialize: ->
     @render()
@@ -20,7 +19,7 @@ class window.SectionCollectionView extends Backbone.View
     this
   # returning itself for chaining calls. syntax bears futher investigation
 
-  change: ->
+  updateGPA: ->
     creditTotal = 0
     gradesTimesCredits = 0
     gpa = 0

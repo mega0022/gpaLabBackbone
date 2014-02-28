@@ -11,5 +11,3 @@
   };
 
 }).call(this);
-
-//# sourceMappingURL=index.map

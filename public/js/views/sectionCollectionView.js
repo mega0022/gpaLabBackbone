@@ -17,9 +17,8 @@ Created by mart2967 on 1/30/14.
     }
 
     SectionCollectionView.prototype.events = {
-      'change': 'change',
-      'click button.add': 'add',
-      'click button.manual': 'makeGPA'
+      'change': 'updateGPA',
+      'click button.add': 'add'
     };
 
     SectionCollectionView.prototype.initialize = function() {
@@ -38,7 +37,7 @@ Created by mart2967 on 1/30/14.
       return this;
     };
 
-    SectionCollectionView.prototype.change = function() {
+    SectionCollectionView.prototype.updateGPA = function() {
       var creditTotal, gpa, gradesTimesCredits, sectionList;
       creditTotal = 0;
       gradesTimesCredits = 0;

@@ -93,5 +93,3 @@
   };
 
 }).call(this);
-
-//# sourceMappingURL=section.map

@@ -19,5 +19,3 @@
   };
 
 }).call(this);
-
-//# sourceMappingURL=schemas.map
